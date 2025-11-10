@@ -1,150 +1,147 @@
-# Anime Search App
+Anime Search App
 
-A React + TypeScript single-page application (SPA) for searching and viewing anime details, built using the [Jikan API](https://docs.api.jikan.moe/).  
+Single-page React + TypeScript app to search and explore anime using the Jikan API.
+Features instant search, filters, sorting, pagination, and detailed anime pages.
 
----
+Live Demo
 
-## Project Overview
+Insert your deployed URL here, e.g., https://djking0-anime-search.netlify.app
 
-This mini-project demonstrates React proficiency by implementing a full-featured **Anime Search App** with:
+Project Overview
 
-- Search anime using instant debounced search  
-- Filter results by genre and year  
-- Sort results by score or popularity (High → Low / Low → High)  
-- Pagination of search results  
-- Detailed anime page with image, synopsis, episodes, score, genres, type, and airing dates  
-- Friendly error handling and loading states  
+This mini-project demonstrates proficiency in React 18, TypeScript, Redux, and Chakra UI.
+Users can:
 
-The project is built with **React 18+, TypeScript, Redux, React Router**, and **Chakra UI** for styling.  
+Search for anime titles instantly (with debouncing)
 
----
+Filter by genre and year
 
-## Live Demo
+Sort by popularity, score, or last update
 
-[https://djking0-anime-search.netlify.app](#)
+View detailed information for each anime
 
----
+Navigate with pagination
 
-## Technical Stack
+Handle API errors gracefully
 
-- **Frontend:** React 18+, TypeScript, Chakra UI  
-- **State Management:** Redux Toolkit  
-- **Routing:** React Router DOM  
-- **API:** Jikan REST API (no authentication required)  
-- **Build Tool:** Vite  
-- **Package Manager:** npm  
+All data is fetched from the Jikan API
+ (no authentication required).
 
----
+Technical Stack
 
-## Setup Instructions
+React 18 with Hooks
 
-1. Clone the repository:
+TypeScript for type safety
 
-```bash
+Redux Toolkit for state management
+
+react-router-dom for page navigation
+
+Chakra UI for responsive UI components
+
+Vite for fast development and build
+
+Setup Instructions
+
+Clone the repository:
+
 git clone https://github.com/djking0/AnimeSearch.git
 cd anime-search
 
-Install dependencies (npm only):
+
+Install dependencies:
 
 npm install
 
 
-Run the development server on port 4000:
+Run the development server:
 
 npm run dev
 
 
-Open your browser at:
+Dev server runs on port 4000: http://localhost:4000
 
-http://localhost:4000
+No environment variables are required; the app works out of the box.
+
+Build for production (for deployment):
+
+npm run build
 
 
-No environment variables are required — the app works immediately after installation.
+Publish the dist folder on Netlify, Vercel, or GitHub Pages.
 
-Project Structure
-src/
-├─ api/                # API helper functions
-│  └─ jikan.ts
-├─ app/
-│  └─ store.ts         # Redux store configuration
-├─ components/
-│  ├─ AnimeCard.tsx
-│  ├─ SearchBar.tsx
-│  └─ Pagination.tsx
-├─ features/
-│  └─ search/
-│     └─ searchSlice.ts
-├─ hooks/
-│  └─ useDebouncedValue.ts
-├─ pages/
-│  ├─ SearchPage.tsx
-│  └─ DetailPage.tsx
-├─ App.tsx
-└─ main.tsx
+Core Features
 
-Features Implemented
-Core Requirements
+Instant Search: Debounced input with 250ms delay to avoid excessive API calls.
 
-Search page with instant search (250ms debounce)
+Pagination: Server-side page navigation.
 
-Pagination of results
+Anime Detail Page: Shows title, synopsis, episodes, score, genres, airing dates.
 
-Filters: genre, year
+Error Handling: Displays API errors and rate-limit messages.
 
-Sorting by score or popularity (High → Low / Low → High)
+Loading & Empty States: Skeletons, messages, and retry options.
 
-Redux for state management
-
-Detail page for selected anime
-
-Loading and empty states
-
-Proper routing using React Router DOM
-
-Functional components with React hooks
-
-Fully TypeScript-typed project
+Responsive Design: Works on mobile, tablet, and desktop.
 
 Bonus Implementation
 
-User Experience Enhancements
+Filter by genre and year
 
-Scaled images in cards and detail page using objectFit="cover"
+Users can refine search results with multiple filters.
 
-Friendly empty states when no results are found or search is blank
+Sorting options
 
-Error handling with retry button on API rate-limit (429)
+Sort by popularity, score, or last update
 
-Back button on the detail page
+Supports ascending (low → high) and descending (high → low) order
 
-Detailed display of genres, type, and airing dates
+Responsive Grid Layout
 
-Technical Enhancements
+Cards resize automatically to avoid large gaps on wide screens (minChildWidth="250px")
 
-Debounced search with request cancellation
+Polished Card Design
 
-Filters and sorting fully wired to API
+Maintains image aspect ratio (objectFit="cover")
 
-AbortController for request cancellation
+Hover effects and shadow for better UX
 
-Responsive grid layout for search results
+Enhanced Background
 
-Redux state handles all filters, sorting, and pagination
+Gradient + subtle repeating pattern to avoid blank pages
 
-How to Use
+Consistent padding and spacing
 
-Type an anime name in the search bar — results update instantly.
+Improved Error & Loading States
 
-Use the filters to narrow by genre or year.
+Handles 429 rate-limits with retry buttons
 
-Sort by score or popularity, High → Low or Low → High.
+Displays meaningful messages for no results or network failures
 
-Click on an anime card to see detailed information on the Detail Page.
+Folder Structure
+src/
+├── api/             # API calls to Jikan
+├── app/             # Redux store
+├── components/      # Reusable UI components (AnimeCard, SearchBar, Pagination)
+├── features/        # Redux slices
+├── pages/           # SearchPage, DetailPage
+├── App.tsx
+├── main.tsx
 
-Use the Back button to return to the search page.
+Running on Netlify
 
-Notes
+Build command: npm run build
 
-API requests are rate-limited by Jikan, so excessive rapid searching may trigger a 429 error. Retry button appears when this occurs.
+Publish directory: dist
 
-Blank search input loads top anime instead of showing empty results.
+No environment variables required. The app works immediately.
+
+Credits
+
+Jikan API
+ for anime data
+
+Chakra UI
+ for components
+
+Inspired by modern anime search apps
