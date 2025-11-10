@@ -28,7 +28,7 @@ export default function DetailPage() {
 
   if (loading)
     return (
-      <Box p={6} textAlign="center">
+      <Box p={6} textAlign="center" minH="50vh">
         <Spinner size="xl" />
       </Box>
     )
@@ -48,7 +48,14 @@ export default function DetailPage() {
     )
 
   return (
-    <Box p={6}>
+    <Box
+      p={6}
+      minH="100vh"
+      bgGradient="linear(to-br, gray.50, gray.200)"
+      bgImage="url('https://www.transparenttextures.com/patterns/cubes.png')"
+      bgRepeat="repeat"
+      borderRadius="md"
+    >
       <Link to="/">
         <Button mb={4}>Back</Button>
       </Link>
@@ -59,6 +66,7 @@ export default function DetailPage() {
           maxW="300px"
           borderRadius="md"
           objectFit="cover"
+          objectPosition="top"
         />
         <Text fontSize="2xl" fontWeight="bold">
           {data.title}
