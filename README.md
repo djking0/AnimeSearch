@@ -1,0 +1,2 @@
+# AnimeSearch
+React Anime Search

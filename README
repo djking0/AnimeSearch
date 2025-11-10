@@ -1,0 +1,45 @@
+# Anime Search App
+
+A React + TypeScript single-page application (SPA) for searching and viewing anime details, built using the [Jikan API](https://docs.api.jikan.moe/).  
+
+---
+
+## Project Overview
+
+This mini-project demonstrates React proficiency by implementing a full-featured **Anime Search App** with:
+
+- Search anime using instant debounced search  
+- Filter results by genre and year  
+- Sort results by score or popularity (High → Low / Low → High)  
+- Pagination of search results  
+- Detailed anime page with image, synopsis, episodes, score, genres, type, and airing dates  
+- Friendly error handling and loading states  
+
+The project is built with **React 18+, TypeScript, Redux, React Router**, and **Chakra UI** for styling.  
+
+---
+
+## Live Demo
+
+[Insert your deployed URL here, e.g., https://your-app.netlify.app](#)
+
+---
+
+## Technical Stack
+
+- **Frontend:** React 18+, TypeScript, Chakra UI  
+- **State Management:** Redux Toolkit  
+- **Routing:** React Router DOM  
+- **API:** Jikan REST API (no authentication required)  
+- **Build Tool:** Vite  
+- **Package Manager:** npm  
+
+---
+
+## Setup Instructions
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/djking0/anime-search.git
+cd anime-search
