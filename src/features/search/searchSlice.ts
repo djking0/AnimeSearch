@@ -19,51 +19,59 @@ const initialState: SearchState = {
   error: null,
 }
 
-// Async thunk for fetching anime
-export const fetchSearch = createAsyncThunk(
+// thunk; accepts flat args. thunkAPI.signal used to cancel fetch
+export const fetchSearch = createAsyncThunk<
+  // return
+  { data: any; query: string; page: number },
+  // arg
+  {
+    query: string
+    page?: number
+    genre?: string
+    year?: string
+    sort?: string
+    order?: string
+  },
+  { rejectValue: string }
+>(
   'search/fetch',
-  async (
-    {
-      query,
-      page,
-      genre,
-      year,
-      sort,
-      order,
-    }: {
-      query: string
-      page: number
-      genre?: string
-      year?: string
-      sort?: string
-      order?: string
-    },
-    thunkAPI
-  ) => {
+  async (args, thunkAPI) => {
+    const { query = '', page = 1, genre, year, sort, order } = args
     try {
+      // base URL
       let url = `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&page=${page}&limit=20`
 
-      if (genre) url += `&genres=${genre}`
-      if (year) url += `&start_date=${year}-01-01&end_date=${year}-12-31`
-      if (sort) url += `&order_by=${sort}`
-      if (order) url += `&sort=${order}`
+      // genre: Jikan expects numeric genre ids (comma-separated allowed)
+      if (genre) url += `&genres=${encodeURIComponent(genre)}`
 
-      const res = await fetch(url)
-      if (!res.ok) throw new Error(`API error ${res.status}: ${await res.text()}`)
+      // year: use start_date & end_date to limit year
+      if (year) {
+        url += `&start_date=${encodeURIComponent(year + '-01-01')}&end_date=${encodeURIComponent(year + '-12-31')}`
+      }
+
+      // sorting field (order_by) and order (sort)
+      if (sort) url += `&order_by=${encodeURIComponent(sort)}`
+      if (order) url += `&sort=${encodeURIComponent(order)}`
+
+      const res = await fetch(url, { signal: thunkAPI.signal })
+      if (!res.ok) {
+        const text = await res.text().catch(() => '')
+        throw new Error(`API error ${res.status}: ${text}`)
+      }
       const data = await res.json()
       return { data, query, page }
     } catch (err: any) {
-      if (err.message.includes('429')) {
-        return thunkAPI.rejectWithValue(
-          'Too many requests! Please wait a moment before searching again.'
-        )
+      // If aborted, let RTK handle it (it will reject with aborted error)
+      if (err.name === 'AbortError') throw err
+      if (String(err).includes('429')) {
+        return thunkAPI.rejectWithValue('Too many requests — please wait a moment and try again.')
       }
       return thunkAPI.rejectWithValue('Failed to fetch results. Please try again.')
     }
   }
 )
 
-const searchSlice = createSlice({
+const slice = createSlice({
   name: 'search',
   initialState,
   reducers: {
@@ -74,6 +82,12 @@ const searchSlice = createSlice({
     setPage(state, action: PayloadAction<number>) {
       state.page = action.payload
     },
+    clearResults(state) {
+      state.results = []
+      state.page = 1
+      state.query = ''
+      state.error = null
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -83,15 +97,17 @@ const searchSlice = createSlice({
       })
       .addCase(fetchSearch.fulfilled, (state, action) => {
         state.loading = false
-        state.results = action.payload.data.data
-        state.hasNextPage = action.payload.data.pagination.has_next_page
+        // API returns data.data (list) and data.pagination
+        state.results = action.payload.data.data ?? []
+        state.hasNextPage = !!(action.payload.data.pagination?.has_next_page)
       })
       .addCase(fetchSearch.rejected, (state, action) => {
         state.loading = false
-        state.error = action.payload as string
+        // action.payload when rejectWithValue used
+        state.error = action.payload ?? action.error.message ?? 'An error occurred'
       })
-  },
+  }
 })
 
-export const { setQuery, setPage } = searchSlice.actions
-export default searchSlice.reducer
+export const { setQuery, setPage, clearResults } = slice.actions
+export default slice.reducer
