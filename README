@@ -21,7 +21,7 @@ The project is built with **React 18+, TypeScript, Redux, React Router**, and **
 
 ## Live Demo
 
-[Insert your deployed URL here, e.g., https://your-app.netlify.app](#)
+[https://djking0-anime-search.netlify.app](#)
 
 ---
 
@@ -41,7 +41,7 @@ The project is built with **React 18+, TypeScript, Redux, React Router**, and **
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/djking0/anime-search.git
+git clone https://github.com/djking0/AnimeSearch.git
 cd anime-search
 
 Install dependencies (npm only):
