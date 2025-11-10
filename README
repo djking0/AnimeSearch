@@ -43,3 +43,108 @@ The project is built with **React 18+, TypeScript, Redux, React Router**, and **
 ```bash
 git clone https://github.com/djking0/anime-search.git
 cd anime-search
+
+Install dependencies (npm only):
+
+npm install
+
+
+Run the development server on port 4000:
+
+npm run dev
+
+
+Open your browser at:
+
+http://localhost:4000
+
+
+No environment variables are required — the app works immediately after installation.
+
+Project Structure
+src/
+├─ api/                # API helper functions
+│  └─ jikan.ts
+├─ app/
+│  └─ store.ts         # Redux store configuration
+├─ components/
+│  ├─ AnimeCard.tsx
+│  ├─ SearchBar.tsx
+│  └─ Pagination.tsx
+├─ features/
+│  └─ search/
+│     └─ searchSlice.ts
+├─ hooks/
+│  └─ useDebouncedValue.ts
+├─ pages/
+│  ├─ SearchPage.tsx
+│  └─ DetailPage.tsx
+├─ App.tsx
+└─ main.tsx
+
+Features Implemented
+Core Requirements
+
+Search page with instant search (250ms debounce)
+
+Pagination of results
+
+Filters: genre, year
+
+Sorting by score or popularity (High → Low / Low → High)
+
+Redux for state management
+
+Detail page for selected anime
+
+Loading and empty states
+
+Proper routing using React Router DOM
+
+Functional components with React hooks
+
+Fully TypeScript-typed project
+
+Bonus Implementation
+
+User Experience Enhancements
+
+Scaled images in cards and detail page using objectFit="cover"
+
+Friendly empty states when no results are found or search is blank
+
+Error handling with retry button on API rate-limit (429)
+
+Back button on the detail page
+
+Detailed display of genres, type, and airing dates
+
+Technical Enhancements
+
+Debounced search with request cancellation
+
+Filters and sorting fully wired to API
+
+AbortController for request cancellation
+
+Responsive grid layout for search results
+
+Redux state handles all filters, sorting, and pagination
+
+How to Use
+
+Type an anime name in the search bar — results update instantly.
+
+Use the filters to narrow by genre or year.
+
+Sort by score or popularity, High → Low or Low → High.
+
+Click on an anime card to see detailed information on the Detail Page.
+
+Use the Back button to return to the search page.
+
+Notes
+
+API requests are rate-limited by Jikan, so excessive rapid searching may trigger a 429 error. Retry button appears when this occurs.
+
+Blank search input loads top anime instead of showing empty results.
