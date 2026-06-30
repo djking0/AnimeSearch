@@ -1,8 +1,147 @@
-# AnimeSearch
-Vite + React Anime Search one page website
-Preview
-https://anime-search-eta.vercel.app
+Anime Search App
 
-Run by following codes:
-npm run build
+Single-page React + TypeScript app to search and explore anime using the Jikan API.
+Features instant search, filters, sorting, pagination, and detailed anime pages.
+
+Live Demo
+
+https://djking0-anime-search.netlify.app
+
+Project Overview
+
+This mini-project demonstrates proficiency in React 18, TypeScript, Redux, and Chakra UI.
+Users can:
+
+Search for anime titles instantly (with debouncing)
+
+Filter by genre and year
+
+Sort by popularity, score, or last update
+
+View detailed information for each anime
+
+Navigate with pagination
+
+Handle API errors gracefully
+
+All data is fetched from the Jikan API
+ (no authentication required).
+
+Technical Stack
+
+React 18 with Hooks
+
+TypeScript for type safety
+
+Redux Toolkit for state management
+
+react-router-dom for page navigation
+
+Chakra UI for responsive UI components
+
+Vite for fast development and build
+
+Setup Instructions
+
+Clone the repository:
+
+git clone https://github.com/djking0/AnimeSearch.git
+cd anime-search
+
+
+Install dependencies:
+
 npm install
+
+
+Run the development server:
+
+npm run dev
+
+
+Dev server runs on port 4000: http://localhost:4000
+
+No environment variables are required; the app works out of the box.
+
+Build for production (for deployment):
+
+npm run build
+
+
+Publish the dist folder on Netlify, Vercel, or GitHub Pages.
+
+Core Features
+
+Instant Search: Debounced input with 250ms delay to avoid excessive API calls.
+
+Pagination: Server-side page navigation.
+
+Anime Detail Page: Shows title, synopsis, episodes, score, genres, airing dates.
+
+Error Handling: Displays API errors and rate-limit messages.
+
+Loading & Empty States: Skeletons, messages, and retry options.
+
+Responsive Design: Works on mobile, tablet, and desktop.
+
+Bonus Implementation
+
+Filter by genre and year
+
+Users can refine search results with multiple filters.
+
+Sorting options
+
+Sort by popularity, score, or last update
+
+Supports ascending (low → high) and descending (high → low) order
+
+Responsive Grid Layout
+
+Cards resize automatically to avoid large gaps on wide screens (minChildWidth="250px")
+
+Polished Card Design
+
+Maintains image aspect ratio (objectFit="cover")
+
+Hover effects and shadow for better UX
+
+Enhanced Background
+
+Gradient + subtle repeating pattern to avoid blank pages
+
+Consistent padding and spacing
+
+Improved Error & Loading States
+
+Handles 429 rate-limits with retry buttons
+
+Displays meaningful messages for no results or network failures
+
+Folder Structure
+src/
+├── api/             # API calls to Jikan
+├── app/             # Redux store
+├── components/      # Reusable UI components (AnimeCard, SearchBar, Pagination)
+├── features/        # Redux slices
+├── pages/           # SearchPage, DetailPage
+├── App.tsx
+├── main.tsx
+
+Running on Netlify
+
+Build command: npm run build
+
+Publish directory: dist
+
+No environment variables required. The app works immediately.
+
+Credits
+
+Jikan API
+ for anime data
+
+Chakra UI
+ for components
+
+Inspired by modern anime search apps
